@@ -104,9 +104,21 @@ Train and save with `joblib`.
 
 See `train_model_binary.py` for details (if included).
 
-# 📈 Performance
-On the test set (20% holdout), the model achieves:
+## 📈 Performance
 
-Accuracy: ~XX% (fill in your actual test accuracy)
+The model was evaluated on a held-out test set (20% of the data, stratified by class). Below are the detailed metrics:
 
-Precision/Recall/F1 for each class (you can add a table if desired)
+| Class           | Precision | Recall | F1-Score | Support |
+|-----------------|-----------|--------|----------|---------|
+| Not acceptable  | 0.80      | 0.79   | 0.79     | 149     |
+| Acceptable      | 0.82      | 0.82   | 0.82     | 171     |
+
+| Metric          | Value |
+|-----------------|-------|
+| **Accuracy**    | 0.81  |
+| Macro Avg       | 0.81  |
+| Weighted Avg    | 0.81  |
+
+- **Overall accuracy**: **81%** on unseen data.
+- The model performs consistently well for both classes, with slightly higher precision and recall for the "acceptable" class.
+- The weighted average F1-score of **0.81** indicates good balance between precision and recall across the imbalanced classes (thanks to SMOTE).
