@@ -113,6 +113,19 @@ Train and save with `joblib`.
 
 See `train_model_binary.py` for details (if included).
 
+
+# 📊 Interactive Dashboard
+The app includes a dedicated dashboard at /dashboard with four interactive Plotly charts:
+
+Alcohol Distribution by Quality and Wine Type – box plots showing how alcohol content differs between acceptable/not acceptable wines for red and white.
+
+Feature Correlation Heatmap – visualises correlations among all physicochemical features.
+
+Feature Importance – displays the most influential features according to the trained Random Forest model.
+
+Quality Distribution by Wine Type – bar chart comparing the proportion of acceptable vs. not acceptable wines for red and white.
+
+
 ## 📈 Performance
 
 The model was evaluated on a held-out test set (20% of the data, stratified by class). Below are the detailed metrics:
