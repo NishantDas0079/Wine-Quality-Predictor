@@ -1,11 +1,11 @@
-# 🍷 Wine Quality Predictor
+# 🍷 Wine Quality Predictor (Red & White)
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://wine-quality-predictor-1-mipw.onrender.com)
 [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/flask-2.3.3-lightgrey)](https://flask.palletsprojects.com/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.8.0-orange)](https://scikit-learn.org/)
 
-A machine learning web application that predicts whether a red wine is **acceptable** (quality ≥ 6) or **not acceptable** (quality ≤ 5) based on its physicochemical properties. The model is trained on the UCI Wine Quality dataset and deployed using Flask on Render.
+A machine learning web application that predicts whether a wine (red or white) is **acceptable** (quality ≥ 6) or **not acceptable** (quality ≤ 5) based on its physicochemical properties. The model is trained on the combined UCI Wine Quality datasets and deployed using Flask on Render.
 
 🌐 **Live Demo**: [https://wine-quality-predictor-1-mipw.onrender.com](https://wine-quality-predictor-1-mipw.onrender.com)
 
@@ -15,7 +15,7 @@ A machine learning web application that predicts whether a red wine is **accepta
 
 ## 📊 Dataset
 
-The model uses the [Red Wine Quality dataset](https://archive.ics.uci.edu/ml/datasets/wine+quality) from UCI. It contains 1,599 samples with 11 input features:
+The model uses the combined **Red** and **White** Wine Quality datasets from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/wine+quality). It contains **6,497 samples** with 12 input features (11 original + `type`):
 
 - Fixed acidity
 - Volatile acidity
@@ -28,6 +28,7 @@ The model uses the [Red Wine Quality dataset](https://archive.ics.uci.edu/ml/dat
 - pH
 - Sulphates
 - Alcohol
+- **Type** (0 = red, 1 = white)
 
 The target variable is a binary class:
 - **Acceptable** (original quality score ≥ 6)
@@ -37,10 +38,17 @@ The target variable is a binary class:
 
 ## 🚀 Features
 
+- **Unified model** for both red and white wines.
 - User-friendly web interface with a clean, responsive design.
-- Quick‑fill sample buttons for easy testing.
+- **Wine type dropdown** to select red or white.
+- **Six quick‑fill sample buttons** (three for red, three for white) for easy testing.
 - JSON API endpoint (`/predict`) for programmatic access.
-- Displays prediction and confidence score.
+- Displays prediction, confidence score, and per‑class probabilities.
+- **Interactive dashboard** (`/dashboard`) with Plotly visualisations:
+  - Alcohol distribution by quality and wine type
+  - Feature correlation heatmap
+  - Feature importance from the Random Forest model
+  - Quality distribution by wine type
 - Handles class imbalance using **SMOTE** during training.
 - Deployed online – accessible anywhere.
 
@@ -51,6 +59,7 @@ The target variable is a binary class:
 - **Backend**: Python, Flask, Gunicorn
 - **Machine Learning**: scikit‑learn, imbalanced‑learn, pandas, numpy
 - **Frontend**: HTML, CSS, JavaScript
+- **Visualisation**: Plotly
 - **Deployment**: Render (free tier)
 
 ---
