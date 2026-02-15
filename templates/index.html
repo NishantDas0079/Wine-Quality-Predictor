@@ -61,7 +61,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        input {
+        input, select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -70,7 +70,7 @@
             transition: border-color 0.3s, box-shadow 0.3s;
             background-color: #fafafa;
         }
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
@@ -83,6 +83,13 @@
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
         }
         .button-container {
             grid-column: 1 / -1;
@@ -122,16 +129,10 @@
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
+            margin: 0 5px;
         }
         .footer-note a:hover {
             text-decoration: underline;
-        }
-        /* Tooltip styling (optional) */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: help;
-            border-bottom: 1px dotted #667eea;
         }
     </style>
 </head>
@@ -188,23 +189,44 @@
                     <label>Alcohol</label>
                     <input type="number" step="0.1" name="alcohol" placeholder="e.g. 9.4" required>
                 </div>
+
+                <!-- NEW: Wine Type Dropdown (full width) -->
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Wine Type</label>
+                    <select name="type" required>
+                        <option value="0">Red</option>
+                        <option value="1">White</option>
+                    </select>
+                </div>
+
                 <div class="button-container">
                     <button type="submit">🔍 Predict Quality</button>
                 </div>
             </div>
         </form>
 
+        <!-- UPDATED: Footer with dashboard link and six sample buttons -->
         <div class="footer-note">
-            ⚡ Built with Flask & Scikit‑learn · 
-            <a href="#" onclick="fillSample1()">Sample Low</a> · 
-            <a href="#" onclick="fillSample2()">Sample Medium</a> · 
-            <a href="#" onclick="fillSample3()">Sample High</a>
+            ⚡ Built with Flask & Scikit‑learn ·
+            <a href="#" onclick="fillRedLow()">Red Low</a> ·
+            <a href="#" onclick="fillRedMedium()">Red Medium</a> ·
+            <a href="#" onclick="fillRedHigh()">Red High</a> ·
+            <a href="#" onclick="fillWhiteLow()">White Low</a> ·
+            <a href="#" onclick="fillWhiteMedium()">White Medium</a> ·
+            <a href="#" onclick="fillWhiteHigh()">White High</a> ·
+            <a href="/dashboard">📊 Dashboard</a>
         </div>
     </div>
 
     <script>
-        // Quick fill buttons for testing
-        function fillSample1() {
+        // Helper to set dropdown value (0=Red, 1=White)
+        function setWineType(type) {
+            document.querySelector('select[name="type"]').value = type;
+        }
+
+        // ----- Red Wine Samples -----
+        function fillRedLow() {
+            setWineType(0);
             document.querySelector('input[name="fixed acidity"]').value = 7.5;
             document.querySelector('input[name="volatile acidity"]').value = 1.2;
             document.querySelector('input[name="citric acid"]').value = 0.0;
@@ -217,7 +239,9 @@
             document.querySelector('input[name="sulphates"]').value = 0.4;
             document.querySelector('input[name="alcohol"]').value = 8.5;
         }
-        function fillSample2() {
+
+        function fillRedMedium() {
+            setWineType(0);
             document.querySelector('input[name="fixed acidity"]').value = 8.2;
             document.querySelector('input[name="volatile acidity"]').value = 0.5;
             document.querySelector('input[name="citric acid"]').value = 0.3;
@@ -230,7 +254,9 @@
             document.querySelector('input[name="sulphates"]').value = 0.6;
             document.querySelector('input[name="alcohol"]').value = 10.2;
         }
-        function fillSample3() {
+
+        function fillRedHigh() {
+            setWineType(0);
             document.querySelector('input[name="fixed acidity"]').value = 9.1;
             document.querySelector('input[name="volatile acidity"]').value = 0.3;
             document.querySelector('input[name="citric acid"]').value = 0.6;
@@ -242,6 +268,52 @@
             document.querySelector('input[name="pH"]').value = 3.5;
             document.querySelector('input[name="sulphates"]').value = 0.9;
             document.querySelector('input[name="alcohol"]').value = 12.5;
+        }
+
+        // ----- White Wine Samples (typical profiles from dataset) -----
+        function fillWhiteLow() {
+            setWineType(1);
+            document.querySelector('input[name="fixed acidity"]').value = 6.8;
+            document.querySelector('input[name="volatile acidity"]').value = 0.45;
+            document.querySelector('input[name="citric acid"]').value = 0.35;
+            document.querySelector('input[name="residual sugar"]').value = 8.5;
+            document.querySelector('input[name="chlorides"]').value = 0.045;
+            document.querySelector('input[name="free sulfur dioxide"]').value = 35.0;
+            document.querySelector('input[name="total sulfur dioxide"]').value = 140.0;
+            document.querySelector('input[name="density"]').value = 0.9930;
+            document.querySelector('input[name="pH"]').value = 3.22;
+            document.querySelector('input[name="sulphates"]').value = 0.45;
+            document.querySelector('input[name="alcohol"]').value = 9.0;
+        }
+
+        function fillWhiteMedium() {
+            setWineType(1);
+            document.querySelector('input[name="fixed acidity"]').value = 7.0;
+            document.querySelector('input[name="volatile acidity"]').value = 0.28;
+            document.querySelector('input[name="citric acid"]').value = 0.31;
+            document.querySelector('input[name="residual sugar"]').value = 6.2;
+            document.querySelector('input[name="chlorides"]').value = 0.045;
+            document.querySelector('input[name="free sulfur dioxide"]').value = 30.0;
+            document.querySelector('input[name="total sulfur dioxide"]').value = 120.0;
+            document.querySelector('input[name="density"]').value = 0.9910;
+            document.querySelector('input[name="pH"]').value = 3.18;
+            document.querySelector('input[name="sulphates"]').value = 0.50;
+            document.querySelector('input[name="alcohol"]').value = 10.5;
+        }
+
+        function fillWhiteHigh() {
+            setWineType(1);
+            document.querySelector('input[name="fixed acidity"]').value = 7.2;
+            document.querySelector('input[name="volatile acidity"]').value = 0.20;
+            document.querySelector('input[name="citric acid"]').value = 0.38;
+            document.querySelector('input[name="residual sugar"]').value = 4.2;
+            document.querySelector('input[name="chlorides"]').value = 0.035;
+            document.querySelector('input[name="free sulfur dioxide"]').value = 45.0;
+            document.querySelector('input[name="total sulfur dioxide"]').value = 160.0;
+            document.querySelector('input[name="density"]').value = 0.9890;
+            document.querySelector('input[name="pH"]').value = 3.25;
+            document.querySelector('input[name="sulphates"]').value = 0.58;
+            document.querySelector('input[name="alcohol"]').value = 12.0;
         }
     </script>
 </body>

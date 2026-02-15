@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wine Quality Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        h1 { text-align: center; color: #4a2c6d; }
+        .container { max-width: 1200px; margin: auto; }
+        .plot-card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin: 20px 0; }
+        .nav { text-align: center; margin: 20px; }
+        .nav a { background: #667eea; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .nav a:hover { background: #5a67d8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍇 Wine Quality Dashboard</h1>
+        <div class="nav">
+            <a href="/">← Back to Predictor</a>
+        </div>
+
+        <div class="plot-card">
+            <div class="plot-title">Alcohol Distribution by Quality and Wine Type</div>
+            {{ plot1|safe }}
+        </div>
+
+        <div class="plot-card">
+            <div class="plot-title">Correlation Heatmap</div>
+            {{ plot2|safe }}
+        </div>
+
+        <div class="plot-card">
+            <div class="plot-title">Feature Importance (Random Forest)</div>
+            {{ plot3|safe }}
+        </div>
+
+        <div class="plot-card">
+            <div class="plot-title">Quality Distribution by Wine Type</div>
+            {{ plot4|safe }}
+        </div>
+    </div>
+</body>
+</html>
